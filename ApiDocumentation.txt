@@ -1,69 +1,104 @@
 
+Inroduction 
 
-register user
+-- you can use postman to test this api
+and put in any header request
 
-method:post
-url :http://localhost:8000/api/register
-data required in body:
+accept key with value application/json
+accept content-type with value application/json
+
+-- this is the constants i used to make response
+
+    'generals' => [
+        
+        'success'           =>    '1',
+        'fill_all_fields'   =>'-1',
+        'not_found'         =>'-2',
+        'duplicated'        =>'-3',
+        'operation_failed'  =>'-4',
+        'invalid_type'      =>'-5',
+        'cannot_access'     =>'-6',
+        'date_time_notmatch'=>'-7',
+        ]
+
+-- i used two types of authentication user
+    first is passport auth and used it at get all tasks for auth user this route will be 
+    protected with middleware auth:api
+    
+    secund is to use token provided to the user when register and send this token
+    if it is wanted and depending on this token get user who post the task if it match 
+    provide the private task else provide public  task
+
+---------------------------------
+
+register user function
+
+method  => post
+url   => http://localhost:8000/api/register
+data required in request body =>
 
 {
-	"username" : "hassan",
-	"email":"hassan@hassan.com",
-	"password":"ahmed607080"
+	"username" : "",
+	"email"    :"",
+	"password" :""
 
 }
 
-response:
+response =>
+{
 
 "status": ""
 
+}
 
 
 -------------------------------------------------------------------------------------
 login with facebook
 
-method:get
-url :http://localhost:8000 => click on btn to register
 
-http:localhost:8000/api/auth/facebook  => to get the user  from facebbok
+click on the below url to get link login with facebook
 
-http:localhost:8000//api/callback  => to insert user info from facebbok 
+url => http://localhost:8000 => click on btn to register
+
+url => http:localhost:8000/auth/facebook  => method => get to get the  facebbok page
+
+url => http:localhost:8000/callback  => to insert user info from facebbok 
 
 
 
 --------------------------------------------
 
-auth user with passport
+Auth user with Laravel Passport
 
 1) get the clinet id and client secret
 
-method post
-utl : http:localhost:8000/api/getsecret
+method => post
+utl    => http:localhost:8000/api/getsecret
 
 response {
 	
-	client_id : 
-	client_secret:
+	client_id : ""
+	client_secret: ""
 }
 
 2) get access token
 
-method post
+method => post
 
-url http://localhost:8000/oauth/token
+url    => http://localhost:8000/oauth/token
 
-data required 
+data required in request body =>
 
 {
-	"grant_type":"password",
-	"client_id":"", from step 1
-	"client_secret":"", from step 1
-	"username":"",
-	"password":"",
-	"scope" : "*"
+	"grant_type"   : "password",
+	"client_id"    : "",           hint : from step 1
+	"client_secret": "",           hint : from step 1
+	"username"     : "",
+	"password"     : "",
+	"scope"        : "*"
 }
 
-response 
+response =>
 
 {
     "token_type": "Bearer",
@@ -74,30 +109,32 @@ response
 
 3)
 
-url : url http://localhost:8000/api/user
+ url  => http://localhost:8000/api/user
 
-method : get
+method => get
 
-data required : in header
+data required  in request header =>
 
-Authorization  = Bearer access_token
+Authorization key with value Bearer access_token   
 
 
+hint : do not change Bearer and access_token from step number 2
 
 
 --------------------------------------------
 
 
-login user
+get user info user
 
-method:post
-url :http://localhost:8000/api/login
+method =>post
+
+url => http://localhost:8000/api/login
 
 data required in body:
 
 {
     "email":"",
-	"password":""
+    "password":""
 }
 
 response:
@@ -120,22 +157,53 @@ response:
         }
     }
 }
+--------------------------------------------------------
+
+get_all_tasks of auth user with passport
+
+note : you don't need to post user_id because you will send the access_token in
+request header of the auth user to get all task else the response will be not authorized
+
+method => get
+url    => http://localhost:8000/api/get_all_tasks
+
+
+response:
+
+{
+{
+    "status": "1",
+    "all_tasks": {
+        "id"      : ,
+        "user_id" : ,
+        "task_title" : "",
+        "task_body"  : "",
+        "task_files" : "",
+        "is_public"  : ,
+        "is_closed"  : ,
+        "task_deadline": "",
+        "created_at": "",
+        "updated_at": ""
+    }
+}
+}
 
 ---------------------------------------------------------
 
 get_single_tasks
 
 
-method:post
-url :http://localhost:8000/api/get_single_tasks
+method  => post
+url     => http://localhost:8000/api/get_single_tasks
 
-data required in body:
+
 
 note : token in data requird is optional but if this task is private or token is not equal user id who post the task the response will be can not access
 
+data required in reuest body =>
 {
 	
-  "task_id" : "1",
+  "task_id" : "",
   "token" : ""
 
 }
@@ -149,6 +217,7 @@ response:
         "task_title": "",
         "task_body": ,
         "is_closed": ,
+        "task_files": ,
         "task_create_time": {
             "date": "",
             "timezone_type": ,
@@ -164,24 +233,39 @@ response:
 
 ---------------------------------------------------------------------
 
-createtask
+Create new Task
+
+Hint => when sending files with task
+
+this is the advice of sending these files in jquery file
+            
+           var files = event.targets.files;
+           var data = new FormDate()
+           var Numbers = "";
+           $.each(files , function(k , v){          
+               data.append(k , v);
+              
+               Numbers = k;
+           });
+           if(numbers !== ""){
+            data.append('FilesNumber',Numbers);
+           }
 
 
-method:post
-url :http://localhost:8000/api/createtask
 
-data required in body:
+method  => post
+url     =>   http://localhost:8000/api/createtask
 
-
+data required in request body:
 
 {
 	
-   "title":"",
-   "body":"",
-   "token":"",
-   "is_public":true,
-   "is_closed":false,
-   "deadline":"2014-04-01 12:00:33"
+   "title"     :  "",
+   "body"      :  "",
+   "token"     :  "",
+   "is_public" :  true,
+   "is_closed" :  false,
+   "deadline"  :  ""  deadline in formate yy-MM-dd hh:mm:ss
 
 }
 
@@ -193,25 +277,24 @@ response:
 
 ---------------------------------------------------------------------
 
-taskupdate
+Update the Task
 
 
-method:post
-url :http://localhost:8000/api/taskupdate
+method => post
+url    => http://localhost:8000/api/taskupdate
 
-data required in body:
-
+data required in body request body:
 
 {
 	
-   "title":"",
-   "body":"",
-   "task_id":1,
-   "token":"",
-   "is_public":true,                optional
-   "is_closed":true,                optional
-   "deadline":"yyyy-MM-dd hh:mm:ss" optional
-   "files" : "" 		            optional
+   "title"     :"",
+   "body"      :"",
+   "task_id"   :1,
+   "token"     :"",
+   "is_public" :true,                       optional
+   "is_closed" :true,                       optional
+   "deadline"  :"yyyy-MM-dd hh:mm:ss"       optional
+   "files"     : "" 		            optional
 
 }
 
@@ -221,45 +304,16 @@ response:
   "status":"1"
 }
 
----------------------------------------------------------------------
-
-taskupdate
-
-
-method:post
-url :http://localhost:8000/api/taskupdate
-
-data required in body:
-
-
-{
-	
-   "title":"",
-   "body":"",
-   "task_id":1,
-   "token":"",
-   "is_public":true,                optional
-   "deadline":"yyyy-MM-dd hh:mm:ss" optional
-   "files" : "" 		            optional
-
-}
-
-response:
-
-{
-  "status":"1"
-}
 
 ---------------------------------------------------------------------
 
-removetask
+Remove the task
 
 
-method:post
-url :http://localhost:8000/api/removetask
+method  => post
+url     => http://localhost:8000/api/removetask
 
-data required in body:
-
+data required in requested body =>
 
 {
 	
@@ -278,23 +332,19 @@ response:
 
 ---------------------------------------------------------------------
 
-togglestatus
+Toggle Status of the task
 
 
-method:post
-url :http://localhost:8000/api/togglestatus
+method => post
+url    => http://localhost:8000/api/togglestatus
 
 data required in body:
 
 
 {
-	
-
    "task_id":1,
    "token":"",
    "is_closed":true
-
-
 }
 
 response:
@@ -305,11 +355,11 @@ response:
 
 ---------------------------------------------------------------------
 
-searchuser
+Search for user
 
-hint : this function will return only public tasks
-method:post
-url :http://localhost:8000/api/searchuser
+Hint   => this function will return The users Founded and their public tasks
+Method => post
+url    => http://localhost:8000/api/searchuser
 
 data required in body:
 
@@ -325,13 +375,13 @@ response:
 {
     "allusers": [
         {
-            "status": "1",
+            "status"  : "1",
             "user": {
-                "user_id": ,
+                "user_id"   : ,
                 "user_email": "",
-                "username": "",
+                "username"  : "",
                 "created_at": {
-                    "date": "2017-11-11 10:05:23.000000",
+                    "date"  : "2017-11-11 10:05:23.000000",
                     "timezone_type": 3,
                     "timezone": "UTC"
                 },

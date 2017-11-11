@@ -14,6 +14,8 @@
         
     </head>
     <body>
-        <a href="/api/auth/facebook">Login With Facebook</a>
+        
+
+        <a href="/auth/facebook">Login With Facebook</a>
     </body>
 </html>

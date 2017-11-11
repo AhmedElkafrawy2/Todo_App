@@ -14,3 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+// register with facebook
+Route::group(['middleware' => ['web']], function () {
+   Route::get('/auth/facebook', 'registerController@getfacebooklogin');
+   Route::get('/callback', 'registerController@handlefacebooklogin');
+});

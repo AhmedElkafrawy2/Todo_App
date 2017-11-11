@@ -14,8 +14,9 @@ use Auth;
 
 class registerController extends Controller
 {
-    // auth with facebbok
     
+
+    // auth with facebbok
     public function getfacebooklogin(){
      
        return Socialite::driver("facebook")->redirect();
@@ -36,13 +37,10 @@ class registerController extends Controller
            $userinsert->password =  $user->token;       
                
            $userinsert->save();
-            return redirect("/");
-        }else{
-            
-             
-             return redirect("/");
             
         }
+        $feedback = array("success" => "Your data has been inserted successfully");
+        return redirect("/")->with($feedback);
     }
     // function to register the user
     public function register(StoreUserRequest $request){

@@ -80,6 +80,19 @@ class taskController extends Controller
        }
    }
    
+   
+   // this function is to return all tasks with user_id
+   
+   public function get_all_tasks(Request $request){
+       
+       $user_id = $request->user()->id;
+       $tasks    = Task::where(["user_id" => $user_id])->first();
+       return response()->json([
+           "status" => config('constants.generals.success'),
+           "all_tasks" => $tasks
+           ]);
+   } 
+   
    // this function is to return one taskes
    public function get_single_tasks(Request $request){
        
@@ -129,6 +142,7 @@ class taskController extends Controller
               'task_body'=>$task->task_body,
               'is_public'=>$ispublic,
               'is_closed'=>$task->is_closed,
+              'task_files'=>$task->task_files,
               'task_create_time'=>$task->created_at,
               'task_update_time'=>$task->updated_at,
           ]
