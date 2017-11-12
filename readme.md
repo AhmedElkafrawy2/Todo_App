@@ -55,6 +55,9 @@ response =>
 login with facebook
 
 
+my subdomain restricted with facebook so if you want to try login with facebook
+after cloning the app using localhost:8000 to test my logic
+
 click on the below url to get link login with facebook
 
 url => https://xamarintest721.000webhostapp.com/ => click on btn to register
