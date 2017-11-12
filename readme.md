@@ -33,7 +33,7 @@ accept content-type with value application/json
 register user function
 
 method  => post
-url   => http://localhost:8000/api/register
+url   => https://xamarintest721.000webhostapp.com/api/register
 data required in request body =>
 
 {
@@ -57,11 +57,11 @@ login with facebook
 
 click on the below url to get link login with facebook
 
-url => http://localhost:8000 => click on btn to register
+url => https://xamarintest721.000webhostapp.com/ => click on btn to register
 
-url => http:localhost:8000/auth/facebook  => method => get to get the  facebbok page
+url => https://xamarintest721.000webhostapp.com/auth/facebook  => method => get to get the  facebbok page
 
-url => http:localhost:8000/callback  => to insert user info from facebbok 
+url => https://xamarintest721.000webhostapp.com/callback  => to insert user info from facebbok 
 
 
 
@@ -72,7 +72,7 @@ Auth user with Laravel Passport
 1) get the clinet id and client secret
 
 method => post
-utl    => http:localhost:8000/api/getsecret
+utl    => https://xamarintest721.000webhostapp.com/api/getsecret
 
 response {
 	
@@ -84,7 +84,7 @@ response {
 
 method => post
 
-url    => http://localhost:8000/oauth/token
+url    => https://xamarintest721.000webhostapp.com/oauth/token
 
 data required in request body =>
 
@@ -108,7 +108,7 @@ response =>
 
 3)
 
- url  => http://localhost:8000/api/user
+ url  => https://xamarintest721.000webhostapp.com/api/user
 
 method => get
 
@@ -127,7 +127,7 @@ get user info user
 
 method =>post
 
-url => http://localhost:8000/api/login
+url => https://xamarintest721.000webhostapp.com/api/login
 
 data required in body:
 
@@ -164,7 +164,7 @@ note : you don't need to post user_id because you will send the access_token in
 request header of the auth user to get all task else the response will be not authorized
 
 method => get
-url    => http://localhost:8000/api/get_all_tasks
+url    => https://xamarintest721.000webhostapp.com/api/get_all_tasks
 
 
 response:
@@ -193,7 +193,7 @@ get_single_tasks
 
 
 method  => post
-url     => http://localhost:8000/api/get_single_tasks
+url     => https://xamarintest721.000webhostapp.com/api/get_single_tasks
 
 
 
@@ -237,6 +237,10 @@ Create new Task
 Hint => when sending files with task
 
 this is the advice of sending these files in jquery file
+and i server side we will create folder to hold all files
+with auth user email in public/images dir
+ and insert into database files names seperated with | 
+ 
             
            var files = event.targets.files;
            var data = new FormDate()
@@ -253,7 +257,7 @@ this is the advice of sending these files in jquery file
 
 
 method  => post
-url     =>   http://localhost:8000/api/createtask
+url     =>   https://xamarintest721.000webhostapp.com/api/createtask
 
 data required in request body:
 
@@ -280,7 +284,7 @@ Update the Task
 
 
 method => post
-url    => http://localhost:8000/api/taskupdate
+url    => https://xamarintest721.000webhostapp.com/api/taskupdate
 
 data required in body request body:
 
@@ -310,7 +314,7 @@ Remove the task
 
 
 method  => post
-url     => http://localhost:8000/api/removetask
+url     => https://xamarintest721.000webhostapp.com/api/removetask
 
 data required in requested body =>
 
@@ -335,7 +339,7 @@ Toggle Status of the task
 
 
 method => post
-url    => http://localhost:8000/api/togglestatus
+url    => https://xamarintest721.000webhostapp.com/api/togglestatus
 
 data required in body:
 
@@ -358,7 +362,7 @@ Search for user
 
 Hint   => this function will return The users Founded and their public tasks
 Method => post
-url    => http://localhost:8000/api/searchuser
+url    => https://xamarintest721.000webhostapp.com/api/searchuser
 
 data required in body:
 
