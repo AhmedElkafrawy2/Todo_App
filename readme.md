@@ -4,7 +4,7 @@ Inroduction
 and put in any header request
 
 accept key with value application/json
-accept content-type with value application/json
+content-type key with value application/json
 
 -- this is the constants i used to make response
 
@@ -21,7 +21,7 @@ accept content-type with value application/json
         ]
 
 -- i used two types of authentication user
-    first is passport auth and used it at get all tasks for auth user this route will be 
+    first is passport grant type auth and used it at get all tasks for auth user this route will be 
     protected with middleware auth:api
     
     secund is to use token provided to the user when register and send this token
@@ -121,7 +121,33 @@ Authorization key with value Bearer access_token
 
 
 hint : do not change Bearer and access_token from step number 2
+----------------------------------------------
 
+
+get all taskes public and private based on auth user
+
+method:get
+url :https://xamarintest721.000webhostapp.com/api/get_all_tasks
+
+data required in header request 
+Authorization key with value Bearer access_token
+response :
+
+{
+    "status": "",
+    "all_tasks": {
+        "id": ,
+        "user_id": "",
+        "task_title": "",
+        "task_body": "",
+        "task_files": "",
+        "is_public": "",
+        "is_closed": "",
+        "task_deadline": "2014-04-01 12:00:33",
+        "created_at": "2017-11-12 04:47:55",
+        "updated_at": "2017-11-12 04:47:55"
+    }
+}
 
 --------------------------------------------
 
